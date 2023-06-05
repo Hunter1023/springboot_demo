@@ -6,6 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
+
     # druid数据源专有配置
     druid:
       initial-size: 5
@@ -22,7 +23,14 @@ spring:
 
       # 配置监控统计拦截的filter
       # stat: 监控统计；log4j: 日志记录；wall: 防御sql注入
-      filters: stat, wall, log4j2
+      filters: stat,wall,log4j2
+      filter:
+        stat:
+          enabled: true
+        wall:
+          enabled: true
+        log4j2:
+          enabled: true
       max-pool-prepared-statement-per-connection-size: 20
       use-global-data-source-stat: true
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMills=500

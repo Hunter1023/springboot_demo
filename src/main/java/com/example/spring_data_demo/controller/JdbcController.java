@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 @Controller
 public class JdbcController {
@@ -24,7 +25,7 @@ public class JdbcController {
     @RequestMapping(value = "/userList", method = RequestMethod.GET)
     @ResponseBody
     public List<Map<String, Object>> userList() {
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM mybatis.user";
         return jdbcTemplate.queryForList(sql);
     }
 

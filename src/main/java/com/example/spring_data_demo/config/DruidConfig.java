@@ -1,23 +1,27 @@
 package com.example.spring_data_demo.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.support.http.StatViewServlet;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.ServletRegistration;
-import javax.sql.DataSource;
 import java.util.HashMap;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class DruidConfig {
-
-    @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
     public DataSource druidDataSource() {
-        return new DruidDataSource();
+
+        /*
+        * new 只会读取system.properties
+        * return new DruidDataSource();
+        * */
+        // 会主动查找datasource.druid jdbc properties
+        return DruidDataSourceBuilder.create().build();
     }
 
     /**
@@ -37,7 +41,7 @@ public class DruidConfig {
         initParameters.put("loginPassword", "123456");
 
         // 允许访问的对象
-        initParameters.put("allow", "127.0.0.1");
+        initParameters.put("allow", "");
 
 
         // 设置初始化参数
